@@ -1,0 +1,100 @@
+
+#menu
+{
+ display :inline-block;
+ position: absolute;
+ width:18%;
+ left:0px;
+ top:5px;
+ text-align:center;
+}
+#separation
+{
+	display:inline-block;
+	position:absolute;
+	top:0px;
+	height:100%;
+	width:2px;
+	border:1px solid white;
+	background-color:green;
+	left:18%;	
+}
+#resultat
+{
+  display:none;
+  position: absolute;
+  width:80%;
+  top: 5px;
+  left:20%;
+  height:100%;
+  overflow:hidden;
+}
+form
+{
+	display:inline-block;
+	position:absolute;
+	left:20%;
+	width:60%;
+	height:15%;
+}
+input:not(.but)
+{
+	text-align:center;
+	float:right;
+	margin-right:100px;
+}
+h2
+{
+	font-family:'BallparkWeiner','Trebuchet MS', Arial, sans-serif;
+	font-size:1.4em;
+	text-align:center;
+	text-decoration:underline;
+	
+}
+#tableau img
+{
+  width:60px;
+  height:40px;
+}
+#tableau
+{
+	display:none;
+	position:absolute;
+	top:30%;
+	border-collapse:collapse;
+	left:17%;
+	border-radius:30px;
+	border:1px solid blue;
+}
+#photo
+{
+   display:none;
+   position:absolute;
+   top:26%;
+   left:80%;
+}
+#resultat p
+{
+	display:none;
+	text-align:center;
+	color:red;
+	
+}
+#tableau td,#tableau tr
+{
+	text-align:center;
+	border:0.3px solid black;
+}
+.g
+{
+	width:100px;
+	height:45px;
+	 overflow:hidden;
+}
+#tableau th
+{
+	height:30%;
+  background-color:blue;
+	opacity:0.5;
+}
+

@@ -1,0 +1,228 @@
+$.extend($.fn,
+   {
+      overlay:function(objet) 
+      {
+      // les parametres par defauts
+	 var defaut=
+	 {
+	    'timeDisplay':1000,
+	     'timeHide':1000,
+	    /*'couleurFond':'#384247',*/
+	    'callback':null // fonction a appele
+	 };
+	 // fusionne nos deux objets
+	 var parametres=$.extend(defaut,objet);
+	 return this.each(function()
+	    {
+	       var formulaire=$(this);
+	       var fenetre=$("#galerie,#principale");
+	     
+	     // on deroule le formuliaire pour l'afficher
+	       formulaire.slideDown(parametres.timeDisplay, function(){
+	       fenetre.css({
+			  visibility:'hidden'
+		  }); // on masque le reste;
+		 formulaire.css({
+		     'display':'inline-block',
+		     'background-color':'#eff0f0',
+		     visibility:'visible',
+		     'opacity':1
+		  });
+
+		     // autorise l'enchainement des fonctions 
+		     if (parametres.callback)
+		     {
+		     parametres.callback(formulaire);
+		     }
+		     });
+		 });
+   },
+   hoverFade:function(options)
+   {
+      var defaut={
+	 'vitesseFadeOut':1000,
+	 'vitesseFadeIn':1000,
+	 'callback':null
+	 };
+
+      var parametres=$.extend(defaut,options);
+      return this.each(function(){
+	 // on change l'element au passage de la souris
+	 $(this).mouseover(function(){
+	    // on fait disparaitre l'element en jouant avec l'opacité
+	    $(this).fadeOut(parametres.vitesseFadeOut,function(){
+	    // après disparition complete de l'element, on l'affiche
+	       $(this).fadeIn(parametres.vitesseFadeIn);
+
+	       if (parametres.callback)
+	       {
+		  parametres.callback($(this));
+	       }
+	    });
+	 });
+
+	 
+      });
+   },
+   imageSlide:function(options)
+    {     
+            //On définit nos paramètres par défaut
+            var defauts=
+            {
+        'interval': 5000,       //Intervalle entre chaque image, en millisecondes
+        'width': '300px',       //Largeur de la galerie
+        'height': '150px',      //Hauteur de la galerie
+        'scaleWidth': true,     //Doit-on adapter la largeur de l'image ?
+        'scaleHeight': true,            //Doit-on adapter la hauteur de l'image ?
+        'callback': null        //Fonction appelée à chaque nouvelle image
+            };  
+           
+            //On fusionne nos deux objets ! =D
+            var parametres=$.extend(defauts, options);
+        
+        //Si l'intervalle est trop court, on le fixe à 1 seconde
+        //pour éviter que le défilement soit trop rapide
+        parametres.interval=Math.max(1000,parametres.interval);
+        
+            return this.each(function()
+        {
+            //On stocke notre élément dans une variable par commodité
+            var element=$(this);
+                            
+            //On compte le nombre d'images de notre galerie
+            var totalImages=element.find('img').length;
+           
+            //Le compteur pour nous permettre de parcourir les images
+            var compteur=0;
+                
+            //On modifie le style de notre galerie
+            element.css(
+            {    
+					//'border': '1px solid #000',
+                //'height': parametres.height,
+                'overflow': 'hidden',
+                 'cursor': 'pointer'
+            }).find('img').each(function(id) //Puis on parcourt enfin chaque image !
+            {
+                //Si on doit adapter les dimensions des images, on le fait
+                if(parametres.scaleWidth)
+                {
+                    $(this).css('width','100%')
+                }
+                if(parametres.scaleHeight)
+                {
+                    $(this).css('height','100%')
+                }
+                
+                //On ne fait apparaitre que la première image
+                if(id>0)
+                {
+                    $(this).hide();
+                }
+            });
+             compteur=1;
+             var concerne= element.find('img:first');
+            //Et on définit enfin notre défilement
+            setInterval(function()
+            {   
+                //On récupère l'image actuellement visible et on la fait disparaitre
+               concerne.fadeOut('slow',function()
+                {                       
+                    //On incrémente le compteur si on n'est pas sur la dernière image
+                    //Sinon, on le remet à 0        
+                    if(compteur!=totalImages-1)
+                    {
+                        compteur++;
+                    }
+                    else
+							{
+								compteur=0;
+							}
+					 });
+					  concerne= element.find('img:eq('+compteur+')');
+               //alert(concerne.attr("src"));
+                 concerne.fadeIn('slow',function()
+                    {
+                        //Et si on a une fonction définie, on l'appelle !
+                        //Et on lui passe notre image en paramètre
+                        if(parametres.callback)
+                        {
+                            parametres.callback($(this));
+                        }
+                    });
+                
+					
+                    //Et on fait donc apparaitre l'image suivante
+                  
+            },parametres.interval);
+        });  
+                             
+    },
+     tabSlide:function(options)
+    {     
+            //On définit nos paramètres par défaut
+            var defauts=
+            {
+					'interval': 800,   //Intervalle entre chaque image, en millisecondes
+					'initiale':'-50%',
+					'finale':'100%'
+            };  
+           
+            //On fusionne nos deux objets ! =D
+            var parametres=$.extend(defauts,options);
+          
+            return this.each(function()
+        {
+            //On stocke notre élément dans une variable par commodité
+            var element=$(this);
+            var limite=element.css('left');
+           
+           alert(defauts.interval);
+				element.animate(
+				{
+					left:defauts.finale
+				},
+				{
+					duration:defauts.interval,
+					easing:'swing',
+					complete:function(){
+						element.css('left',parametres.initiale);
+						if (defauts.complete)
+						{
+							defauts.complete(element);
+						}
+					},
+					step: function(){
+						if (defauts.step)
+						{
+							defauts.step(element);
+						}
+					
+					},	
+					queue:true
+				}).	
+				animate(
+				{
+					left:limite
+				},
+				{
+					duration:defauts.interval,
+					easing:'linear',
+					queue:true,
+					complete:function(){
+						if (defauts.complete)
+						{
+							defauts.complete(element);
+						}
+					},
+					step: function(){
+						if (defauts.step)
+						{
+							defauts.step(element);
+						}
+					}	
+				});                      
+});
+}
+});
+

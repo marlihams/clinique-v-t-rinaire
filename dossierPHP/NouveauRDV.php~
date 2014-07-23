@@ -1,0 +1,51 @@
+<?php
+session_start(); // On démarre la session AVANT toute chose
+	include "connect.php";
+	$vConn = fConnect();
+	$telP=$_SESSION['tel'];
+	$nomAni=$_SESSION['animal'];
+
+	if(isset($_POST['prestation']))
+		$presta = $_POST['prestation'];
+	if(isset($_POST['veterinaire']))
+		$veto = $_POST['veterinaire'];
+	if(isset($_POST['date']))
+		$date = $_POST['date'];
+	if(isset($_POST['heure']))
+		$heure = $_POST['heure'];
+
+
+	// recuperation de l'ID du vétérinaire 
+	$vetoID= substr($veto, 0,2); 
+	//echo $vetoID;
+	
+	// transformation de la date et de l'heure en timestamp
+	$timestamp = $date." ". $heure;	
+	//echo $timestamp;
+
+	
+	
+	// recuperation de l'ID max du rdv pour l'incrémentation
+	$vSql ="select MAX(id) as id from rendezvous";
+	$vQuery=pg_query($vConn, $vSql);
+	while ($vResult = pg_fetch_array($vQuery, null, PGSQL_ASSOC)) {
+		$rdvID="$vResult[id]"+1;
+	}
+	
+
+	if(!empty($presta) AND !empty($veto) AND !empty($date)){ 
+	
+	//echo $presta, $veto, $date;
+	
+		$vSql ="insert into rendezvous (id, veterinaireid, nomanimal, telproprio, date) values ($rdvID, $vetoID, '$nomAni', '$telP', to_timestamp('$timestamp', 'YYYY/MM/DD HH24:MI'));";
+		$vQuery=pg_query($vConn, $vSql) or die("l'insertion a echoué");
+
+		$vSql2 ="insert into rendezvous_prestation (intitule, rendezvous) values('$presta', $rdvID)";
+		$vQuery=pg_query($vConn, $vSql2); 
+		if( $vQuery)
+		{
+			$_SESSION['resultat']=1;
+		}
+	}
+ header('Location:client.php');
+?>

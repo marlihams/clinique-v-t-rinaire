@@ -1,0 +1,65 @@
+
+#calendrier
+{
+	display:none;
+	position:absolute;
+	width: 50%;
+	height:80%;
+	top:34%;
+	left:45%;
+	border:2px,solid blue;
+}
+#aff
+{
+	display:inline-block;
+	position:absolute;
+	right:4%;
+	top:30%;
+}
+
+#tableau img
+{
+  width:90px;
+  height:45px;
+}
+#tableau
+{
+	display:inline-block;
+	position:absolute;
+	top:0%;
+	right:5%;
+	border-collapse:collapse;
+	border-radius:30px;
+	border:1px solid blue;
+}
+#photo
+{
+   display:inline-block;
+   position:absolute;
+   top:0%;
+   left:85%;
+}
+#resultat p
+{
+	display:none;
+	text-align:center;
+	color:red;
+	
+}
+#tableau td,#tableau tr
+{
+	text-align:center;
+	border:0.3px solid black;
+}
+.g
+{
+	width:100px;
+	height:45px;
+	 overflow:hidden;
+}
+/*#tableau th
+{
+	height:30%;
+  background-color:blue;
+	opacity:0.5;
+}*/

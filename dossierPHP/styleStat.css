@@ -1,0 +1,157 @@
+body{
+	color: #046380;
+	margin:0;
+	overflow-x:hidden;
+}
+
+.entete{
+	font-weight: bold;
+	border: dashed 2px grey;
+	color:red;
+}
+#medicament{
+	position: absolute;
+	width: 50%;
+	height:67%;
+	overflow-y: auto;
+	margin-top: 20px;
+	left: 0px;
+	top: 0px;
+	overflow-x:hidden;
+}
+#veterinaire {
+	position: absolute;
+	width: 50%;
+	height:67%;
+	border-left: double 7px grey;
+	overflow-y: auto;
+	overflow-x:hidden;
+	margin-top: 20px;
+	right: 0px;
+	top:0px;
+}
+#global{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	border-top: double 7px grey;
+	height: 30%;
+}
+#rdvClient{
+	position: absolute ;
+	width: 50%;
+	height: 25%;
+	left: 0px;
+}
+#rdvAni{
+	position: absolute;
+	width: 50%;
+	height: 25;
+	right: 0px;
+}
+
+select{
+	margin-top: 10px;
+}
+
+.cercle{
+	position: absolute;
+	background:#046380;
+	border-radius: 50%;
+	width: 160px;
+	height: 160px;
+	border: 2px solid grey;
+	color: red;
+	font-size: 5em;
+	text-align: center;
+}
+
+
+.result{
+	margin-top: 20px;
+}
+
+#MR1{
+	position: relative;
+	width: 100%;
+	height: 25%;
+	text-align: right;
+	
+}
+#MR1 .cercle{
+	left: 10px;	
+}
+
+#MR2{
+	position: relative;
+	width: 100%;
+	height: 25%;
+	text-align: left;
+}
+
+#MR2 .cercle{
+	right: 10px;	
+}
+
+#MR3{
+	position: relative;
+	width: 100%;
+	height: 25%;
+	text-align: right;
+}
+#MR3 .cercle{
+	left: 10px;	
+}
+
+#VR1{
+	position: relative;
+	width: 100%;
+	height: 45%;
+	text-align: right;
+}
+#VR1 .cercle{
+	left: 10px;	
+}
+
+#VR2{
+	position: relative;
+	width: 100%;
+	height: 45%;
+	text-align: left;
+}
+#VR2 .cercle{
+	right: 10px;	
+}
+
+#CR{
+	position: relative;
+	width: 100%;
+	height: 70%;
+	text-align: left;
+}
+#CR .cercle{
+	right: 10px;	
+}
+
+#AR{
+	position: relative;
+	width: 100%;
+	height: 70%;
+	text-align: left;
+}
+#AR .cercle{
+	left: 10px;	
+}
+
+.labelR{
+	position: relative;
+	top:48%;
+	right: 20px;
+}
+.labelL{
+	position: relative;
+	top: 48%;
+	left: 20px;
+}
+
+

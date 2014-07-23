@@ -1,0 +1,18 @@
+﻿CREATE OR REPLACE FUNCTION deleteRDV() 
+RETURNS TRIGGER AS $supprRDV$	  
+    DECLARE
+	temp RECORD;
+    BEGIN
+	SELECT * INTO temp
+	FROM rendezvous R
+	WHERE OLD.telproprio=R.telproprio AND OLD.nom=R.nomanimal;
+        DELETE FROM rendezvous_prestation RP WHERE RP.rendezvous=temp.id;
+	DELETE FROM rendezvous R WHERE R.nomanimal=OLD.nom AND R.telproprio=OLD.telproprio;
+        RETURN NEW;
+    END;
+$supprRDV$ LANGUAGE plpgsql;
+
+CREATE TRIGGER deleteRDV
+    BEFORE DELETE ON animal
+    FOR EACH ROW
+    EXECUTE PROCEDURE deleteRDV();
